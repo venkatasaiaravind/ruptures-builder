@@ -1,0 +1,22 @@
+name: Build Ruptures Wheel
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Build the wheel file
+      run: pip wheel ruptures==1.1.8 -w dist
+
+    - name: Upload the finished wheel file
+      uses: actions/upload-artifact@v3
+      with:
+        name: ruptures-wheel
+        path: dist/
